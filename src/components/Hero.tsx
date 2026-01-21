@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Github, Linkedin, Twitter, ArrowDown, Calendar } from 'lucide-react';
+import { Github, Linkedin, Mail, Download, Briefcase } from 'lucide-react';
 import gsap from 'gsap';
 import { useTilt, useMagnetic } from '@/hooks/useGSAP';
 import profileImage from '@/assets/profile-hero.jpg';
@@ -78,13 +78,6 @@ const Hero = () => {
         0.6
       );
 
-      // Subtitle
-      tl.fromTo('.hero-subtitle',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-        0.9
-      );
-
       // Title typing area
       tl.fromTo('.hero-title',
         { y: 30, opacity: 0 },
@@ -106,18 +99,11 @@ const Hero = () => {
         1.5
       );
 
-      // Photo gallery strip
-      tl.fromTo('.photo-strip img',
-        { scale: 0, rotate: () => gsap.utils.random(-15, 15) },
-        { scale: 1, rotate: () => gsap.utils.random(-8, 8), duration: 0.8, stagger: 0.1, ease: 'back.out(1.5)' },
-        1.2
-      );
-
       // Scroll indicator
       tl.fromTo('.scroll-indicator',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-        2
+        1.8
       );
     }, containerRef);
 
@@ -183,67 +169,84 @@ const Hero = () => {
             />
           </div>
 
-          {/* Status badge */}
-          <div className="status-badge absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-card border border-border rounded-full text-xs font-medium">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-foreground">Available</span>
+          {/* Status badge - Job seeking focus */}
+          <div className="status-badge absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-card border border-primary/50 rounded-full text-xs font-medium">
+            <Briefcase size={12} className="text-primary" />
+            <span className="text-foreground">Open to Work</span>
           </div>
         </div>
 
-        {/* Main Heading */}
+        {/* Main Heading - Job focused */}
         <h1 className="hero-name font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-4 leading-tight">
-          Hey, I'm <span className="text-gradient">Rishabh</span>!
-          <br />
-          <span className="text-4xl md:text-5xl lg:text-6xl">I build web products that scale.</span>
+          Hi, I'm <span className="text-gradient">Rishabh Jaiswal</span>
         </h1>
 
         {/* Subtitle with typing effect */}
         <div className="hero-title h-8 mb-6">
-          <span className="text-lg md:text-xl text-muted-foreground font-mono">
+          <span className="text-lg md:text-xl text-primary font-mono font-medium">
             {displayText}
-            <span className="cursor-blink text-primary ml-0.5">|</span>
+            <span className="cursor-blink ml-0.5">|</span>
           </span>
         </div>
 
-        {/* Description */}
-        <p className="hero-description text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
-          I'm a full-stack developer with <span className="text-foreground font-medium">4.5+ years</span> of experience 
-          crafting scalable applications, blockchain solutions, and AI-powered tools. 
-          Currently building exceptional digital experiences.
+        {/* Description - Professional & Job-focused */}
+        <p className="hero-description text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4 text-lg">
+          Full-Stack Developer with <span className="text-foreground font-semibold">4.5+ years</span> of experience 
+          building scalable web applications, blockchain solutions, and high-performance systems.
         </p>
+        
+        {/* Key highlights for recruiters */}
+        <div className="hero-description flex flex-wrap justify-center gap-3 mb-8">
+          {[
+            'React & Node.js',
+            'TypeScript',
+            'Web3 & Solidity',
+            'Docker & AWS',
+            'System Design',
+          ].map((skill) => (
+            <span 
+              key={skill}
+              className="px-3 py-1.5 text-sm font-mono bg-primary/10 text-primary rounded-full border border-primary/20"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
+        {/* CTA Buttons - Job focused */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
           <div ref={ctaRef} className="hero-cta">
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium 
                        transition-all duration-500 hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
             >
-              <Calendar size={18} />
-              Book a Call
+              <Mail size={18} />
+              Hire Me
             </a>
           </div>
           <a
-            href="#projects"
-            className="hero-cta inline-flex items-center px-8 py-4 border border-border text-foreground rounded-full font-medium
-                     hover:border-primary/50 hover:text-primary transition-all duration-500"
+            href="/Rishabh_Jaiswal_Resume.pdf"
+            target="_blank"
+            className="hero-cta inline-flex items-center gap-2 px-8 py-4 border border-primary/50 text-primary rounded-full font-medium
+                     hover:bg-primary hover:text-primary-foreground transition-all duration-500"
           >
-            View Work
+            <Download size={18} />
+            Download Resume
           </a>
         </div>
 
         {/* Social Links Row */}
-        <div className="flex items-center justify-center gap-4 mb-16">
+        <div className="flex items-center justify-center gap-4">
           {[
             { icon: Github, href: 'https://github.com/rishabhjaiswal3', label: 'GitHub' },
             { icon: Linkedin, href: 'https://www.linkedin.com/in/rishabh-jaiswal-710b18169/', label: 'LinkedIn' },
-            { icon: Twitter, href: '#', label: 'Twitter' },
+            { icon: Mail, href: 'mailto:rj838486@gmail.com', label: 'Email' },
           ].map((social, i) => (
             <a
               key={social.label}
               href={social.href}
-              target="_blank"
+              target={social.label !== 'Email' ? '_blank' : undefined}
               rel="noopener noreferrer"
               className="hero-cta p-3 rounded-xl border border-border/50 text-muted-foreground 
                        hover:text-primary hover:border-primary/30 hover:bg-primary/5 
@@ -253,26 +256,6 @@ const Hero = () => {
             >
               <social.icon size={20} />
             </a>
-          ))}
-        </div>
-
-        {/* Photo Gallery Strip - like Parth's site */}
-        <div className="photo-strip flex items-center justify-center gap-4 mb-16">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div
-              key={i}
-              className="relative w-20 h-24 md:w-24 md:h-28 rounded-xl overflow-hidden border border-border/30 
-                       shadow-lg hover:scale-110 hover:z-10 transition-transform duration-300 cursor-pointer"
-              style={{ transform: `rotate(${(i - 3) * 4}deg)` }}
-            >
-              <img
-                src={profileImage}
-                alt={`Photo ${i}`}
-                className="w-full h-full object-cover"
-                style={{ filter: i % 2 === 0 ? 'none' : 'grayscale(100%)' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
-            </div>
           ))}
         </div>
       </div>

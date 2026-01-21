@@ -1,33 +1,32 @@
-import { useScrollReveal, useLineDraw } from '@/hooks/useGSAP';
-import { Sparkles, Zap, Target, Heart } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useGSAP';
+import { Code2, Rocket, Users, TrendingUp, CheckCircle2 } from 'lucide-react';
 import profileImage from '@/assets/profile-hero.jpg';
 
 const highlights = [
   {
-    icon: Sparkles,
-    title: 'End-to-End Builder',
-    description: 'From concept to deployment, I handle the full stack with precision.',
+    icon: Code2,
+    title: 'Full-Stack Expertise',
+    description: 'Proficient in React, Node.js, TypeScript, and modern frameworks with hands-on production experience.',
   },
   {
-    icon: Zap,
-    title: 'Performance Obsessed',
-    description: 'Every millisecond matters. I optimize for speed and efficiency.',
+    icon: Rocket,
+    title: 'Performance Focused',
+    description: 'Reduced video buffering by 40% and query latency by 25% through optimized architectures.',
   },
   {
-    icon: Target,
-    title: 'User-Focused',
-    description: 'Building experiences that delight users and drive results.',
+    icon: Users,
+    title: 'Team Collaboration',
+    description: 'Worked in cross-functional teams at Surebright, Mogi IO, and Queppelin delivering impactful products.',
   },
   {
-    icon: Heart,
-    title: 'Passionate Learner',
-    description: 'Always exploring new technologies and pushing boundaries.',
+    icon: TrendingUp,
+    title: 'Scalable Solutions',
+    description: 'Built systems handling 10,000+ blockchain transactions and 5,000+ concurrent users.',
   },
 ];
 
 const About = () => {
   const sectionRef = useScrollReveal();
-  const lineRef = useLineDraw();
 
   return (
     <section id="about" className="section-padding relative overflow-hidden">
@@ -39,62 +38,72 @@ const About = () => {
           {/* Section Header */}
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 mb-4 text-xs font-mono text-primary bg-primary/10 rounded-full">
-              About
+              About Me
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6">
-              Here's what sets me apart
-              <br />
-              <span className="text-gradient">and makes me unique</span>
+              Why You Should <span className="text-gradient">Hire Me</span>
             </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              I bring technical expertise, proven results, and a passion for building products that make a difference.
+            </p>
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-            {/* Left - About Card with Image */}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left - About Card */}
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
               <div className="relative p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-500">
-                {/* Mini header */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/50">
+                {/* Header */}
+                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-border/30">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary/50">
                     <img src={profileImage} alt="Rishabh" className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <p className="text-foreground font-medium">Learn more about me</p>
-                    <p className="text-xs text-muted-foreground">Good morning! ☀️</p>
+                    <h3 className="text-xl font-display text-foreground">Rishabh Jaiswal</h3>
+                    <p className="text-primary font-medium">Full Stack Developer</p>
                   </div>
-                  <div className="ml-auto flex items-center gap-1.5 px-2 py-1 bg-green-500/10 rounded-full text-xs text-green-500">
-                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                    Available
+                  <div className="ml-auto px-3 py-1.5 bg-primary/10 rounded-full text-xs font-medium text-primary border border-primary/20">
+                    4.5+ Years
                   </div>
                 </div>
 
-                <div className="space-y-4 text-muted-foreground">
+                {/* Professional Summary */}
+                <div className="space-y-4 text-muted-foreground mb-6">
                   <p className="leading-relaxed">
-                    I'm <span className="text-foreground font-medium">Rishabh</span>, an experienced full-stack engineer 
-                    based in <span className="text-foreground">Bareilly, India</span>. I specialize in building 
-                    scalable web applications that solve real problems.
+                    I'm a <span className="text-foreground font-medium">results-driven Full Stack Developer</span> with 
+                    expertise in building scalable web applications, blockchain solutions, and high-performance backend systems.
                   </p>
                   <p className="leading-relaxed">
-                    With <span className="text-primary font-medium">4.5+ years</span> of experience, I've worked with 
-                    companies like <span className="text-primary">Surebright</span>, <span className="text-primary">Mogi IO</span>, 
-                    and <span className="text-primary">Queppelin</span> — building everything from eCommerce platforms 
-                    to blockchain solutions.
+                    I've delivered impactful solutions at <span className="text-primary font-medium">Surebright</span> (eCommerce integrations), 
+                    <span className="text-primary font-medium"> Mogi IO</span> (video streaming), and <span className="text-primary font-medium">Queppelin</span> (Web3 & NFT platforms).
                   </p>
-                  <p className="leading-relaxed">
-                    When I'm not coding, you'll find me exploring new technologies, 
-                    contributing to open source, or solving algorithmic challenges.
-                  </p>
+                </div>
+
+                {/* Key Achievements */}
+                <div className="space-y-3">
+                  <p className="text-sm font-medium text-foreground mb-3">Key Achievements:</p>
+                  {[
+                    'Built video transcoding engine reducing buffering by 40%',
+                    'Processed 10,000+ on-chain blockchain transactions',
+                    'Developed Redis SDK reducing query latency by 25%',
+                    'Implemented SSO reducing login time by 30%',
+                  ].map((achievement, i) => (
+                    <div key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <CheckCircle2 size={16} className="text-primary mt-0.5 shrink-0" />
+                      <span>{achievement}</span>
+                    </div>
+                  ))}
                 </div>
 
                 {/* Quick stats */}
                 <div className="flex gap-6 mt-8 pt-6 border-t border-border/30">
                   {[
-                    { value: '4.5+', label: 'Years Exp' },
-                    { value: '10K+', label: 'Transactions' },
-                    { value: '40%', label: 'Perf Gain' },
+                    { value: '4.5+', label: 'Years Experience' },
+                    { value: '3', label: 'Companies' },
+                    { value: '15+', label: 'Projects' },
                   ].map((stat) => (
-                    <div key={stat.label} className="text-center">
+                    <div key={stat.label} className="text-center flex-1">
                       <p className="text-2xl font-display text-gradient">{stat.value}</p>
                       <p className="text-xs text-muted-foreground">{stat.label}</p>
                     </div>
@@ -104,47 +113,29 @@ const About = () => {
             </div>
 
             {/* Right - Highlight Cards */}
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid gap-4">
               {highlights.map((item, i) => (
                 <div
                   key={item.title}
-                  className="group p-6 rounded-xl bg-card/50 border border-border/30 hover:border-primary/30 
-                           transition-all duration-500 hover:-translate-y-1"
+                  className="group flex gap-4 p-5 rounded-xl bg-card/50 border border-border/30 hover:border-primary/30 
+                           transition-all duration-500 hover:-translate-x-1"
                   style={{ transitionDelay: `${i * 50}ms` }}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4 
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0
                                 group-hover:bg-primary/20 transition-colors">
-                    <item.icon size={20} className="text-primary" />
+                    <item.icon size={24} className="text-primary" />
                   </div>
-                  <h3 className="text-foreground font-medium mb-2 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {item.description}
-                  </p>
+                  <div>
+                    <h3 className="text-foreground font-medium mb-1 group-hover:text-primary transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Photo strip like Parth's site */}
-          <div className="flex items-center justify-center gap-4 py-8">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div
-                key={i}
-                className="relative w-32 h-40 md:w-40 md:h-48 rounded-2xl overflow-hidden border border-border/30 
-                         shadow-xl hover:scale-105 hover:z-10 transition-all duration-500 cursor-pointer group"
-                style={{ transform: `rotate(${(i - 3) * 3}deg)` }}
-              >
-                <img
-                  src={profileImage}
-                  alt={`Photo ${i}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  style={{ filter: i % 2 === 0 ? 'none' : 'grayscale(100%)' }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-            ))}
           </div>
         </div>
       </div>
