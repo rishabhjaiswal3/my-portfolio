@@ -1,4 +1,4 @@
-import { useStaggerReveal } from '@/hooks/useGSAP';
+import { useStaggerReveal, useLineDraw, useCounter } from '@/hooks/useGSAP';
 
 const skillCategories = [
   {
@@ -14,52 +14,70 @@ const skillCategories = [
     skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Prisma'],
   },
   {
-    title: 'Blockchain & Web3',
+    title: 'Blockchain',
     skills: ['Solidity', 'Ethereum', 'Polygon', 'Web3.js', 'Ethers.js', 'MetaMask'],
   },
   {
-    title: 'DevOps & Cloud',
+    title: 'DevOps',
     skills: ['Docker', 'Kubernetes', 'AWS', 'DigitalOcean', 'Nginx', 'CI/CD'],
   },
   {
-    title: 'Tools & Others',
+    title: 'Tools',
     skills: ['Git', 'FFmpeg', 'RabbitMQ', 'Keycloak', 'Stripe', 'OpenAI API'],
   },
 ];
 
+const stats = [
+  { value: 4, suffix: '.5+', label: 'Years Experience' },
+  { value: 10, suffix: 'K+', label: 'Transactions' },
+  { value: 40, suffix: '%', label: 'Buffering Reduced' },
+  { value: 25, suffix: '%', label: 'Latency Improved' },
+];
+
+const StatCounter = ({ value, suffix, label }: { value: number; suffix: string; label: string }) => {
+  const counterRef = useCounter(value, 2, suffix);
+  
+  return (
+    <div className="text-center">
+      <p className="text-4xl md:text-5xl font-display text-gradient">
+        <span ref={counterRef}>{value}{suffix}</span>
+      </p>
+      <p className="text-muted-foreground mt-2 text-sm">{label}</p>
+    </div>
+  );
+};
+
 const Skills = () => {
   const sectionRef = useStaggerReveal('.skill-card');
+  const lineRef = useLineDraw();
 
   return (
     <section id="skills" className="section-padding relative overflow-hidden">
       {/* Background */}
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
 
-      <div className="container-custom">
+      <div className="container-custom relative z-10">
         <div ref={sectionRef}>
-          {/* Section Title */}
-          <div className="flex items-center gap-4 mb-12">
-            <span className="text-primary font-mono text-lg">04.</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Skills & Technologies</h2>
-            <div className="flex-1 h-px bg-border" />
+          {/* Section Header */}
+          <div className="flex items-center gap-6 mb-16">
+            <span className="text-primary font-mono text-sm">04</span>
+            <h2 className="font-display text-4xl md:text-5xl text-foreground">Skills</h2>
+            <div ref={lineRef} className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
           </div>
 
           {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {skillCategories.map((category) => (
               <div
                 key={category.title}
-                className="skill-card p-6 bg-gradient-card rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 group"
+                className="skill-card p-6 rounded-xl bg-card/50 border border-border/30 hover:border-primary/30 transition-all duration-500 group"
               >
-                <h3 className="text-xl font-semibold text-foreground mb-4 group-hover:text-primary transition-colors">
+                <h3 className="text-lg text-foreground mb-4 group-hover:text-primary transition-colors">
                   {category.title}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="tech-tag"
-                    >
+                    <span key={skill} className="tech-tag">
                       {skill}
                     </span>
                   ))}
@@ -69,17 +87,9 @@ const Skills = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-            {[
-              { number: '3+', label: 'Years Experience' },
-              { number: '10K+', label: 'Transactions Processed' },
-              { number: '40%', label: 'Buffering Reduced' },
-              { number: '25%', label: 'Latency Improved' },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center skill-card">
-                <p className="text-4xl md:text-5xl font-bold text-gradient">{stat.number}</p>
-                <p className="text-muted-foreground mt-2 text-sm">{stat.label}</p>
-              </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-16 border-t border-border/30">
+            {stats.map((stat) => (
+              <StatCounter key={stat.label} {...stat} />
             ))}
           </div>
         </div>
