@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import { Github, Linkedin, Twitter, ArrowDown, Calendar } from 'lucide-react';
 import gsap from 'gsap';
 import { useTilt, useMagnetic } from '@/hooks/useGSAP';
 import profileImage from '@/assets/profile-hero.jpg';
@@ -16,8 +16,8 @@ const Hero = () => {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const tiltRef = useTilt(8);
-  const ctaRef = useMagnetic(0.4);
+  const imageRef = useTilt(12);
+  const ctaRef = useMagnetic(0.3);
 
   // Typing effect
   useEffect(() => {
@@ -48,67 +48,74 @@ const Hero = () => {
   // GSAP Entrance Animations
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.3 });
+      const tl = gsap.timeline({ delay: 0.5 });
       
-      // Blobs fade in
-      tl.fromTo('.hero-blob', 
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 2, ease: 'power3.out', stagger: 0.2 },
+      // Profile image scales in with rotation
+      tl.fromTo('.hero-profile',
+        { scale: 0, rotate: -10, opacity: 0 },
+        { scale: 1, rotate: 0, opacity: 1, duration: 1.2, ease: 'elastic.out(1, 0.5)' },
         0
       );
-      
-      // Greeting slides in
-      tl.fromTo('.hero-greeting',
-        { x: -60, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-        0.5
+
+      // Ring animations
+      tl.fromTo('.profile-ring',
+        { scale: 0.8, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.15 },
+        0.3
       );
 
-      // Name reveal with clip-path
+      // Status badge pops in
+      tl.fromTo('.status-badge',
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2)' },
+        0.8
+      );
+
+      // Name reveal
       tl.fromTo('.hero-name',
-        { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
-        { clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 1.2, ease: 'power4.out' },
-        0.7
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power4.out' },
+        0.6
       );
 
-      // Title fade up
-      tl.fromTo('.hero-title',
+      // Subtitle
+      tl.fromTo('.hero-subtitle',
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-        1
+        0.9
+      );
+
+      // Title typing area
+      tl.fromTo('.hero-title',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+        1.1
       );
 
       // Description
       tl.fromTo('.hero-description',
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-        1.2
+        1.3
       );
 
-      // CTA buttons stagger
-      tl.fromTo('.hero-cta > *',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
-        1.4
-      );
-
-      // Image reveal
-      tl.fromTo('.hero-image-wrapper',
-        { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)', opacity: 0 },
-        { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', opacity: 1, duration: 1.4, ease: 'power4.inOut' },
-        0.8
-      );
-
-      // Social icons
-      tl.fromTo('.hero-social',
+      // CTA buttons
+      tl.fromTo('.hero-cta',
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
-        1.6
+        1.5
+      );
+
+      // Photo gallery strip
+      tl.fromTo('.photo-strip img',
+        { scale: 0, rotate: () => gsap.utils.random(-15, 15) },
+        { scale: 1, rotate: () => gsap.utils.random(-8, 8), duration: 0.8, stagger: 0.1, ease: 'back.out(1.5)' },
+        1.2
       );
 
       // Scroll indicator
       tl.fromTo('.scroll-indicator',
-        { opacity: 0, y: -20 },
+        { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
         2
       );
@@ -117,165 +124,165 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
 
-  // Mouse parallax for blobs
+  // Continuous floating animation for profile
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
+    gsap.to('.hero-profile', {
+      y: -10,
+      duration: 3,
+      yoyo: true,
+      repeat: -1,
+      ease: 'power1.inOut',
+    });
 
-      const x = (clientX / innerWidth - 0.5) * 30;
-      const y = (clientY / innerHeight - 0.5) * 30;
+    gsap.to('.profile-ring-1', {
+      rotate: 360,
+      duration: 20,
+      repeat: -1,
+      ease: 'none',
+    });
 
-      gsap.to('.hero-blob-1', { x: x * 0.5, y: y * 0.5, duration: 1, ease: 'power2.out' });
-      gsap.to('.hero-blob-2', { x: x * -0.3, y: y * -0.3, duration: 1, ease: 'power2.out' });
-      gsap.to('.hero-blob-3', { x: x * 0.4, y: y * -0.4, duration: 1, ease: 'power2.out' });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    gsap.to('.profile-ring-2', {
+      rotate: -360,
+      duration: 25,
+      repeat: -1,
+      ease: 'none',
+    });
   }, []);
 
   return (
     <section
       ref={containerRef}
-      className="min-h-screen flex items-center relative overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-20"
     >
-      {/* Elegant Background */}
+      {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-hero" />
       
-      {/* Morphing Blobs */}
-      <div className="hero-blob hero-blob-1 absolute top-1/4 left-1/4 w-[500px] h-[500px] blob opacity-40"
-           style={{ background: 'linear-gradient(135deg, hsl(185 75% 45% / 0.3), hsl(175 60% 40% / 0.15))' }} />
-      <div className="hero-blob hero-blob-2 absolute bottom-1/4 right-1/4 w-[600px] h-[600px] blob-slow opacity-30"
-           style={{ background: 'linear-gradient(135deg, hsl(195 70% 50% / 0.2), hsl(185 75% 45% / 0.1))' }} />
-      <div className="hero-blob hero-blob-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] blob opacity-20"
-           style={{ background: 'linear-gradient(135deg, hsl(175 60% 40% / 0.25), transparent)' }} />
+      {/* Animated gradient orbs */}
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '-2s' }} />
 
-      {/* Subtle Grid */}
-      <div className="absolute inset-0 grid-bg opacity-30" />
+      {/* Subtle grid */}
+      <div className="absolute inset-0 grid-bg opacity-20" />
 
-      <div className="container-custom section-padding relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <p className="hero-greeting text-primary font-mono text-sm tracking-widest uppercase">
-              Hello, I'm
-            </p>
-
-            <h1 className="hero-name font-display text-6xl md:text-7xl lg:text-8xl text-foreground leading-[0.9]">
-              Rishabh
-              <br />
-              <span className="text-gradient">Jaiswal</span>
-            </h1>
-
-            <div className="hero-title h-10">
-              <span className="text-xl md:text-2xl text-muted-foreground font-light">
-                {displayText}
-                <span className="cursor-blink text-primary ml-0.5">|</span>
-              </span>
-            </div>
-
-            <p className="hero-description text-muted-foreground max-w-lg leading-relaxed text-base">
-              A passionate Software Developer with <span className="text-foreground">4.5+ years</span> of experience 
-              crafting scalable web applications, blockchain solutions, and AI-powered tools. 
-              Currently building exceptional digital experiences.
-            </p>
-
-            <div className="hero-cta flex flex-wrap gap-4 pt-4">
-              <div ref={ctaRef}>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium 
-                           transition-all duration-500 hover:shadow-lg hover:shadow-primary/25"
-                >
-                  Get in Touch
-                </a>
-              </div>
-              <a
-                href="#projects"
-                className="inline-flex items-center px-8 py-4 border border-border text-foreground rounded-full font-medium
-                         hover:border-primary/50 hover:text-primary transition-all duration-500"
-              >
-                View Work
-              </a>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex gap-6 pt-4">
-              <a
-                href="https://github.com/rishabhjaiswal3"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hero-social text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-1"
-                aria-label="GitHub"
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/rishabh-jaiswal-710b18169/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hero-social text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-1"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="mailto:rj838486@gmail.com"
-                className="hero-social text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-1"
-                aria-label="Email"
-              >
-                <Mail size={20} />
-              </a>
-            </div>
+      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        {/* Profile Image with Rings */}
+        <div ref={imageRef} className="hero-profile relative inline-block mb-8" style={{ transformStyle: 'preserve-3d' }}>
+          {/* Animated rings */}
+          <div className="profile-ring profile-ring-1 absolute -inset-4 border border-primary/20 rounded-full" />
+          <div className="profile-ring profile-ring-2 absolute -inset-8 border border-dashed border-primary/10 rounded-full" />
+          
+          {/* Glow effect */}
+          <div className="absolute -inset-2 bg-gradient-to-r from-primary/30 to-accent/30 rounded-full blur-xl opacity-50" />
+          
+          {/* Image container */}
+          <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary/50 p-1">
+            <img
+              src={profileImage}
+              alt="Rishabh Jaiswal"
+              className="w-full h-full object-cover rounded-full"
+            />
           </div>
 
-          {/* Right Content - Profile Image with 3D Tilt */}
-          <div className="flex justify-center lg:justify-end">
-            <div ref={tiltRef} className="hero-image-wrapper relative" style={{ transformStyle: 'preserve-3d' }}>
-              {/* Glow ring */}
-              <div className="absolute -inset-4 rounded-3xl opacity-50 pulse-glow"
-                   style={{ background: 'linear-gradient(135deg, hsl(185 75% 45% / 0.2), transparent)' }} />
-              
-              {/* Image container */}
-              <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border border-border/50">
-                <img
-                  src={profileImage}
-                  alt="Rishabh Jaiswal"
-                  className="w-full h-full object-cover"
-                />
-                {/* Elegant overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
-              </div>
-
-              {/* Floating elements with depth */}
-              <div 
-                className="absolute -top-6 -right-6 px-4 py-2 glass rounded-xl text-xs font-mono text-primary floating"
-                style={{ transform: 'translateZ(40px)' }}
-              >
-                React.js
-              </div>
-              <div 
-                className="absolute -bottom-6 -left-6 px-4 py-2 glass rounded-xl text-xs font-mono text-primary floating-slow"
-                style={{ transform: 'translateZ(30px)', animationDelay: '-3s' }}
-              >
-                Node.js
-              </div>
-              <div 
-                className="absolute top-1/2 -right-10 px-4 py-2 glass rounded-xl text-xs font-mono text-primary floating"
-                style={{ transform: 'translateZ(50px)', animationDelay: '-5s' }}
-              >
-                Web3
-              </div>
-            </div>
+          {/* Status badge */}
+          <div className="status-badge absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 bg-card border border-border rounded-full text-xs font-medium">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            <span className="text-foreground">Available</span>
           </div>
+        </div>
+
+        {/* Main Heading */}
+        <h1 className="hero-name font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-4 leading-tight">
+          Hey, I'm <span className="text-gradient">Rishabh</span>!
+          <br />
+          <span className="text-4xl md:text-5xl lg:text-6xl">I build web products that scale.</span>
+        </h1>
+
+        {/* Subtitle with typing effect */}
+        <div className="hero-title h-8 mb-6">
+          <span className="text-lg md:text-xl text-muted-foreground font-mono">
+            {displayText}
+            <span className="cursor-blink text-primary ml-0.5">|</span>
+          </span>
+        </div>
+
+        {/* Description */}
+        <p className="hero-description text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
+          I'm a full-stack developer with <span className="text-foreground font-medium">4.5+ years</span> of experience 
+          crafting scalable applications, blockchain solutions, and AI-powered tools. 
+          Currently building exceptional digital experiences.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
+          <div ref={ctaRef} className="hero-cta">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium 
+                       transition-all duration-500 hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
+            >
+              <Calendar size={18} />
+              Book a Call
+            </a>
+          </div>
+          <a
+            href="#projects"
+            className="hero-cta inline-flex items-center px-8 py-4 border border-border text-foreground rounded-full font-medium
+                     hover:border-primary/50 hover:text-primary transition-all duration-500"
+          >
+            View Work
+          </a>
+        </div>
+
+        {/* Social Links Row */}
+        <div className="flex items-center justify-center gap-4 mb-16">
+          {[
+            { icon: Github, href: 'https://github.com/rishabhjaiswal3', label: 'GitHub' },
+            { icon: Linkedin, href: 'https://www.linkedin.com/in/rishabh-jaiswal-710b18169/', label: 'LinkedIn' },
+            { icon: Twitter, href: '#', label: 'Twitter' },
+          ].map((social, i) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-cta p-3 rounded-xl border border-border/50 text-muted-foreground 
+                       hover:text-primary hover:border-primary/30 hover:bg-primary/5 
+                       transition-all duration-300 hover:-translate-y-1"
+              aria-label={social.label}
+              style={{ transitionDelay: `${i * 50}ms` }}
+            >
+              <social.icon size={20} />
+            </a>
+          ))}
+        </div>
+
+        {/* Photo Gallery Strip - like Parth's site */}
+        <div className="photo-strip flex items-center justify-center gap-4 mb-16">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div
+              key={i}
+              className="relative w-20 h-24 md:w-24 md:h-28 rounded-xl overflow-hidden border border-border/30 
+                       shadow-lg hover:scale-110 hover:z-10 transition-transform duration-300 cursor-pointer"
+              style={{ transform: `rotate(${(i - 3) * 4}deg)` }}
+            >
+              <img
+                src={profileImage}
+                alt={`Photo ${i}`}
+                className="w-full h-full object-cover"
+                style={{ filter: i % 2 === 0 ? 'none' : 'grayscale(100%)' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="scroll-indicator absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
+      <div className="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
         <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase">Scroll</span>
-        <div className="scroll-line" />
+        <div className="w-5 h-9 border border-border/50 rounded-full flex items-start justify-center p-1.5">
+          <div className="w-1 h-2 bg-primary rounded-full animate-bounce" />
+        </div>
       </div>
     </section>
   );
