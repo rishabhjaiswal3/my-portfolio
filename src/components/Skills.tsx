@@ -81,15 +81,15 @@ const Skills = () => {
       <div className="container-custom relative z-10">
         <div ref={sectionRef}>
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 text-xs font-mono text-primary bg-primary/10 rounded-full">
+          <div className="text-center mb-20">
+            <span className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-xs font-mono uppercase tracking-widest text-primary bg-primary/10 rounded-full border border-primary/20">
               <Wrench size={12} />
               Toolbox
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 tracking-tight">
               Technologies I Work With
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
+            <p className="text-muted-foreground max-w-xl mx-auto text-lg font-light">
               My toolkit spans from frontend to blockchain — everything needed to build modern web applications.
             </p>
           </div>

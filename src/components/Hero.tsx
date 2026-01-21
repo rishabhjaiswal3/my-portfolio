@@ -177,36 +177,37 @@ const Hero = () => {
         </div>
 
         {/* Main Heading - Job focused */}
-        <h1 className="hero-name font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-4 leading-tight">
-          Hi, I'm <span className="text-gradient">Rishabh Jaiswal</span>
+        <h1 className="hero-name font-display text-5xl md:text-7xl lg:text-8xl text-foreground mb-6 tracking-tight">
+          Hi, I'm <span className="text-gradient">Rishabh</span>
         </h1>
 
         {/* Subtitle with typing effect */}
-        <div className="hero-title h-8 mb-6">
-          <span className="text-lg md:text-xl text-primary font-mono font-medium">
+        <div className="hero-title h-10 mb-8">
+          <span className="text-xl md:text-2xl text-primary font-mono font-medium tracking-wide">
             {displayText}
-            <span className="cursor-blink ml-0.5">|</span>
+            <span className="cursor-blink ml-1 text-primary/70">_</span>
           </span>
         </div>
 
         {/* Description - Professional & Job-focused */}
-        <p className="hero-description text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4 text-lg">
-          Full-Stack Developer with <span className="text-foreground font-semibold">4.5+ years</span> of experience 
+        <p className="hero-description text-muted-foreground max-w-2xl mx-auto mb-6 text-lg md:text-xl font-light">
+          Full-Stack Developer with <span className="text-foreground font-medium">4.5+ years</span> of experience 
           building scalable web applications, blockchain solutions, and high-performance systems.
         </p>
         
         {/* Key highlights for recruiters */}
-        <div className="hero-description flex flex-wrap justify-center gap-3 mb-8">
+        <div className="hero-description flex flex-wrap justify-center gap-2 md:gap-3 mb-10">
           {[
-            'React & Node.js',
+            'React',
+            'Node.js',
             'TypeScript',
-            'Web3 & Solidity',
-            'Docker & AWS',
-            'System Design',
+            'Web3',
+            'AWS',
           ].map((skill) => (
             <span 
               key={skill}
-              className="px-3 py-1.5 text-sm font-mono bg-primary/10 text-primary rounded-full border border-primary/20"
+              className="px-4 py-2 text-sm font-medium bg-secondary/80 text-secondary-foreground rounded-lg 
+                       border border-border/50 hover:border-primary/50 hover:text-primary transition-all duration-300"
             >
               {skill}
             </span>
