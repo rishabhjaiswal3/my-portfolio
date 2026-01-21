@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Sparkles } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, Globe } from 'lucide-react';
 import { useStaggerReveal } from '@/hooks/useGSAP';
 
 import projectAIImageGen from '@/assets/project-ai-image-gen.jpg';
@@ -8,6 +8,7 @@ import projectOTT from '@/assets/project-ott-platform.jpg';
 import projectEcommerce from '@/assets/project-ecommerce.jpg';
 import projectTranscoding from '@/assets/project-transcoding.jpg';
 import projectVossle from '@/assets/project-vossle.jpg';
+import projectKultGames from '@/assets/project-kult-games.jpg';
 
 const projects = [
   {
@@ -39,10 +40,19 @@ const projects = [
   {
     title: 'Video Transcoding Engine',
     description:
-      'Scalable video processing pipeline using FFmpeg and HLS for adaptive bitrate streaming. Achieved 40% reduction in buffering with intelligent quality switching.',
+      'A cloud-based video processing system that converts raw videos into multiple quality formats (360p, 480p, 720p, 1080p) for seamless streaming. Uses FFmpeg for encoding and HLS (HTTP Live Streaming) protocol to automatically adjust video quality based on viewer\'s internet speed—eliminating buffering by 40%.',
     image: projectTranscoding,
-    tags: ['FFmpeg', 'HLS', 'Node.js', 'Docker'],
+    tags: ['FFmpeg', 'HLS', 'Node.js', 'Docker', 'AWS S3'],
     featured: true,
+  },
+  {
+    title: 'Kult Games',
+    description:
+      'A modern gaming platform website with competitive esports features, tournament management, and community engagement. Built with cutting-edge web technologies for optimal performance and user experience.',
+    image: projectKultGames,
+    tags: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+    featured: false,
+    isWeb: true,
   },
   {
     title: 'OTT Streaming Platform',
@@ -130,6 +140,12 @@ const Projects = () => {
                           <span className="flex items-center gap-1 px-2 py-1 bg-primary/20 rounded-full text-xs text-primary">
                             <Sparkles size={12} />
                             AI Powered
+                          </span>
+                        )}
+                        {project.isWeb && (
+                          <span className="flex items-center gap-1 px-2 py-1 bg-accent/20 rounded-full text-xs text-accent-foreground">
+                            <Globe size={12} />
+                            Web Project
                           </span>
                         )}
                       </div>
