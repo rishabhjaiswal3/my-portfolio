@@ -1,74 +1,83 @@
-import { Mail, MapPin, Phone, Github, Linkedin, Send } from 'lucide-react';
-import { useScrollReveal } from '@/hooks/useGSAP';
+import { Mail, MapPin, Send, Github, Linkedin, ArrowUpRight } from 'lucide-react';
+import { useScrollReveal, useMagnetic, useLineDraw } from '@/hooks/useGSAP';
 
 const Contact = () => {
   const sectionRef = useScrollReveal();
+  const buttonRef = useMagnetic(0.4);
+  const lineRef = useLineDraw();
 
   return (
-    <section id="contact" className="section-padding bg-gradient-hero relative overflow-hidden">
+    <section id="contact" className="section-padding relative overflow-hidden">
       {/* Background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[200px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[200px]" />
 
-      <div className="container-custom">
+      <div className="container-custom relative z-10">
         <div ref={sectionRef} className="max-w-2xl mx-auto text-center">
-          {/* Section Title */}
-          <p className="text-primary font-mono text-lg mb-4">05. What's Next?</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Get In Touch</h2>
+          {/* Section Header */}
+          <div className="flex items-center justify-center gap-6 mb-8">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent to-border max-w-[100px]" />
+            <span className="text-primary font-mono text-sm">05</span>
+            <div ref={lineRef} className="flex-1 h-px bg-gradient-to-r from-border to-transparent max-w-[100px]" />
+          </div>
 
-          <p className="text-lg text-muted-foreground mb-12 leading-relaxed">
-            I'm currently looking for new opportunities. Whether you have a project in mind, 
-            a question, or just want to say hi, my inbox is always open. I'll try my best 
-            to get back to you!
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6">
+            Let's <span className="text-gradient">Connect</span>
+          </h2>
+
+          <p className="text-muted-foreground mb-12 leading-relaxed max-w-md mx-auto">
+            I'm currently open to new opportunities. Whether you have a project in mind 
+            or just want to say hi, I'd love to hear from you.
           </p>
 
           {/* Contact Info */}
-          <div className="flex flex-wrap justify-center gap-6 mb-12">
+          <div className="flex flex-wrap justify-center gap-8 mb-12 text-sm">
             <a
               href="mailto:rj838486@gmail.com"
-              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
             >
-              <Mail size={20} />
-              <span>rj838486@gmail.com</span>
+              <Mail size={16} />
+              <span className="animated-underline">rj838486@gmail.com</span>
             </a>
             <span className="flex items-center gap-2 text-muted-foreground">
-              <MapPin size={20} />
+              <MapPin size={16} />
               <span>Bareilly, India</span>
-            </span>
-            <span className="flex items-center gap-2 text-muted-foreground">
-              <Phone size={20} />
-              <span>+91-6396964517</span>
             </span>
           </div>
 
           {/* CTA Button */}
-          <a
-            href="mailto:rj838486@gmail.com"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-primary text-primary-foreground rounded-lg font-semibold 
-                     hover:shadow-lg glow transition-all duration-300 hover:-translate-y-1 text-lg"
-          >
-            <Send size={20} />
-            Say Hello
-          </a>
+          <div ref={buttonRef} className="inline-block mb-16">
+            <a
+              href="mailto:rj838486@gmail.com"
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground rounded-full font-medium text-lg
+                       transition-all duration-500 hover:shadow-lg hover:shadow-primary/25"
+            >
+              <Send size={20} />
+              Say Hello
+              <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </a>
+          </div>
 
           {/* Social Links */}
-          <div className="flex justify-center gap-8 mt-12">
+          <div className="flex justify-center gap-4">
             <a
               href="https://github.com/rishabhjaiswal3"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 glass rounded-xl text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 hover:-translate-y-2"
+              className="p-4 rounded-xl border border-border/30 text-muted-foreground hover:text-primary hover:border-primary/30 
+                       transition-all duration-300 hover:-translate-y-1"
               aria-label="GitHub"
             >
-              <Github size={28} />
+              <Github size={22} />
             </a>
             <a
               href="https://www.linkedin.com/in/rishabh-jaiswal-710b18169/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 glass rounded-xl text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 hover:-translate-y-2"
+              className="p-4 rounded-xl border border-border/30 text-muted-foreground hover:text-primary hover:border-primary/30 
+                       transition-all duration-300 hover:-translate-y-1"
               aria-label="LinkedIn"
             >
-              <Linkedin size={28} />
+              <Linkedin size={22} />
             </a>
           </div>
         </div>
