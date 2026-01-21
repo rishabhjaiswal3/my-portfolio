@@ -1,5 +1,5 @@
-import { useStaggerReveal, useLineDraw, useCounter } from '@/hooks/useGSAP';
-import { Wrench, Code, Database, Blocks, Cloud, Settings, Zap, Cpu, Globe } from 'lucide-react';
+import { useStaggerReveal, useCounter } from '@/hooks/useGSAP';
+import { Wrench, Code, Database, Blocks, Cloud, Settings, Zap, Cpu, Globe, Rocket } from 'lucide-react';
 
 const toolbox = [
   {
@@ -33,7 +33,7 @@ const toolbox = [
     color: 'from-sky-500/20 to-blue-500/20',
   },
   {
-    category: 'Tools',
+    category: 'Advanced Tools',
     icon: Settings,
     tools: ['Git', 'FFmpeg', 'RabbitMQ', 'Keycloak', 'Stripe', 'OpenAI API'],
     color: 'from-rose-500/20 to-red-500/20',
@@ -44,26 +44,27 @@ const stats = [
   { value: 4, suffix: '.5+', label: 'Years Experience', icon: Zap },
   { value: 10, suffix: 'K+', label: 'Blockchain Txns', icon: Blocks },
   { value: 40, suffix: '%', label: 'Buffering Reduced', icon: Globe },
-  { value: 25, suffix: '%', label: 'Latency Improved', icon: Cpu },
+  { value: 98, suffix: '%', label: 'Client Satisfaction', icon: Rocket },
 ];
 
 const StatCounter = ({ value, suffix, label, icon: Icon }: typeof stats[0]) => {
   const counterRef = useCounter(value, 2, suffix);
-  
+
   return (
-    <div className="relative group p-6 rounded-2xl bg-card/50 border border-border/30 hover:border-primary/30 
-                  transition-all duration-500 text-center">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 
-                    group-hover:opacity-100 transition-opacity" />
-      <div className="relative z-10">
-        <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary/10 flex items-center justify-center 
-                      group-hover:bg-primary/20 transition-colors">
-          <Icon size={24} className="text-primary" />
+    <div className="relative group p-8 md:p-10 rounded-[2.5rem] bg-card/40 backdrop-blur-xl border border-border/30 hover:border-primary/30 
+                  transition-all duration-700 text-left shadow-2xl shadow-black/5 overflow-hidden">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors" />
+      <div className="relative z-10 flex flex-col justify-between h-full">
+        <div className="w-12 h-12 mb-10 rounded-2xl bg-primary/10 flex items-center justify-center 
+                      group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+          <Icon size={22} className="text-primary group-hover:text-inherit" />
         </div>
-        <p className="text-3xl md:text-4xl font-display text-gradient mb-2">
-          <span ref={counterRef}>{value}{suffix}</span>
-        </p>
-        <p className="text-sm text-muted-foreground">{label}</p>
+        <div>
+          <p className="text-5xl md:text-6xl font-display font-black text-foreground mb-3 tracking-tighter">
+            <span ref={counterRef}>{value}{suffix}</span>
+          </p>
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground font-display">{label}</p>
+        </div>
       </div>
     </div>
   );
@@ -71,66 +72,65 @@ const StatCounter = ({ value, suffix, label, icon: Icon }: typeof stats[0]) => {
 
 const Skills = () => {
   const sectionRef = useStaggerReveal('.skill-card');
-  const lineRef = useLineDraw();
 
   return (
-    <section id="skills" className="section-padding relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
+    <section id="skills" className="section-padding relative overflow-hidden bg-muted/10">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+      <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[200px] -z-10" />
 
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 font-display">
         <div ref={sectionRef}>
           {/* Section Header */}
-          <div className="text-center mb-20">
-            <span className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-xs font-mono uppercase tracking-widest text-primary bg-primary/10 rounded-full border border-primary/20">
-              <Wrench size={12} />
-              Toolbox
+          <div className="max-w-4xl mb-24 text-left">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 text-[10px] font-black uppercase tracking-[0.4em] text-primary bg-primary/10 rounded-full border border-primary/20">
+              <Wrench size={14} />
+              The Infrastructure
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 tracking-tight">
-              Technologies I Work With
+            <h2 className="text-6xl md:text-8xl text-foreground mb-10 leading-[0.9] font-black tracking-tighter">
+              Elite Tech Stack & <br /> <span className="text-gradient italic font-bold">Capabilities</span>
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto text-lg font-light">
-              My toolkit spans from frontend to blockchain — everything needed to build modern web applications.
+            <p className="text-muted-foreground text-xl md:text-2xl font-light leading-relaxed max-w-2xl border-l-2 border-primary/30 pl-10">
+              Battle-tested frameworks and languages for architecting resilient, high-performance systems.
             </p>
           </div>
 
           {/* Stats Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
             {stats.map((stat) => (
               <StatCounter key={stat.label} {...stat} />
             ))}
           </div>
 
           {/* Toolbox Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {toolbox.map((category, i) => (
               <div
                 key={category.category}
-                className={`skill-card group relative p-6 rounded-2xl bg-card/50 border border-border/30 
-                          hover:border-primary/30 transition-all duration-500 overflow-hidden`}
-                style={{ transitionDelay: `${i * 50}ms` }}
+                className={`skill-card group relative p-12 rounded-[3rem] bg-card shadow-2xl border border-border/30 
+                          hover:border-primary/40 transition-all duration-700 overflow-hidden flex flex-col text-left`}
+                style={{ transitionDelay: `${i * 100}ms` }}
               >
-                {/* Gradient background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 
-                              group-hover:opacity-100 transition-opacity duration-500`} />
-                
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center 
-                                  group-hover:bg-primary/20 transition-colors">
-                      <category.icon size={20} className="text-primary" />
+                {/* Visual Accent */}
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${category.color} opacity-0 
+                               group-hover:opacity-40 transition-opacity duration-700 blur-3xl -translate-y-1/2 translate-x-1/2`} />
+
+                <div className="relative z-10 flex-1">
+                  <div className="flex items-center gap-6 mb-12">
+                    <div className="w-16 h-16 rounded-[1.25rem] bg-muted/50 border border-white/5 flex items-center justify-center 
+                                  group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-700 shadow-xl">
+                      <category.icon size={28} className="text-primary group-hover:text-inherit" />
                     </div>
-                    <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">
+                    <h3 className="text-3xl font-black text-foreground group-hover:text-primary transition-colors tracking-tight">
                       {category.category}
                     </h3>
                   </div>
-                  
-                  <div className="flex flex-wrap gap-2">
+
+                  <div className="flex flex-wrap gap-3">
                     {category.tools.map((tool) => (
-                      <span 
-                        key={tool} 
-                        className="px-3 py-1.5 text-xs font-mono bg-muted/50 text-muted-foreground rounded-lg
-                                 border border-border/30 hover:border-primary/30 hover:text-primary transition-all"
+                      <span
+                        key={tool}
+                        className="px-5 py-2.5 text-xs font-black bg-muted/60 text-muted-foreground rounded-2xl
+                                 border border-white/5 hover:border-primary/50 hover:text-primary hover:bg-white dark:hover:bg-black transition-all duration-500 uppercase tracking-widest"
                       >
                         {tool}
                       </span>

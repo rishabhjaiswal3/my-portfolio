@@ -1,125 +1,130 @@
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, ArrowUpRight, Calendar, MessageSquare } from 'lucide-react';
-import { useScrollReveal, useMagnetic, useLineDraw } from '@/hooks/useGSAP';
+import { Mail, MapPin, Send, Github, Linkedin, ArrowUpRight, Calendar, MessageSquare, Sparkles } from 'lucide-react';
+import { useScrollReveal, useMagnetic, useStaggerReveal } from '@/hooks/useGSAP';
 
 const Contact = () => {
   const sectionRef = useScrollReveal();
-  const buttonRef = useMagnetic(0.3);
-  const lineRef = useLineDraw();
+  const magneticPillRef = useMagnetic(0.2);
+  const socialRef = useStaggerReveal('.social-icon-item');
+
+  const email = "rj838486@gmail.com";
+  const telegramUrl = "https://t.me/Proto200";
+  const calendarUrl = `mailto:${email}?subject=Schedule%20a%20Meeting&body=Hi%20Rishabh,%20I'd%20like%20to%20schedule%20a%20meeting%20to%20discuss...`;
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[200px]" />
+    <section id="contact" className="section-padding relative overflow-hidden bg-background">
+      {/* Improvised Background Dynamics */}
+      <div className="absolute inset-0 bg-gradient-hero opacity-50" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-primary/5 rounded-full blur-[250px] -z-10 animate-pulse" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] -z-10" />
 
-      <div className="container-custom relative z-10">
-        <div ref={sectionRef} className="max-w-4xl mx-auto">
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 grid-bg opacity-[0.2] pointer-events-none" />
+
+      <div className="container-custom relative z-10 font-display">
+        <div ref={sectionRef} className="max-w-6xl mx-auto text-center md:text-left">
           {/* Section Header */}
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 text-xs font-mono text-primary bg-primary/10 rounded-full">
-              <MessageSquare size={12} />
-              Contact
-            </span>
-            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6">
-              Let's <span className="text-gradient">Connect</span>
-            </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto leading-relaxed">
-              I'm currently open to new opportunities. Whether you have a project in mind 
-              or just want to say hi, I'd love to hear from you.
-            </p>
-          </div>
-
-          {/* Contact Cards Grid */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {/* Email Card */}
-            <a
-              href="mailto:rj838486@gmail.com"
-              className="group p-6 rounded-2xl bg-card/50 border border-border/30 hover:border-primary/30 
-                       transition-all duration-500 hover:-translate-y-1"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center 
-                              group-hover:bg-primary/20 transition-colors">
-                  <Mail size={24} className="text-primary" />
-                </div>
-                <ArrowUpRight size={20} className="text-muted-foreground group-hover:text-primary 
-                                                  transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </div>
-              <h3 className="text-lg font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
-                Email Me
-              </h3>
-              <p className="text-muted-foreground font-mono text-sm">
-                rj838486@gmail.com
+          <div className="flex flex-col md:flex-row items-end justify-between gap-12 mb-24">
+            <div className="max-w-2xl text-left">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 text-[10px] font-black uppercase tracking-[0.4em] text-primary bg-primary/10 rounded-full border border-primary/20">
+                <MessageSquare size={12} />
+                Get in Touch
+              </span>
+              <h2 className="text-7xl md:text-9xl text-foreground font-black tracking-tighter leading-[0.8] mb-10">
+                Let's <br />
+                <span className="text-gradient font-bold italic">Connect</span>
+              </h2>
+              <p className="text-muted-foreground text-xl md:text-2xl font-light leading-relaxed max-w-xl">
+                I'm currently scouting for ambitious projects and engineering challenges.
+                Whether it's a new venture or a technical deep-dive, my inbox is open.
               </p>
-            </a>
+            </div>
 
-            {/* Book a Call Card */}
-            <a
-              href="#"
-              className="group p-6 rounded-2xl bg-card/50 border border-border/30 hover:border-primary/30 
-                       transition-all duration-500 hover:-translate-y-1"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center 
-                              group-hover:bg-primary/20 transition-colors">
-                  <Calendar size={24} className="text-primary" />
-                </div>
-                <ArrowUpRight size={20} className="text-muted-foreground group-hover:text-primary 
-                                                  transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />
+            {/* Magnetic Pill */}
+            <div ref={magneticPillRef} className="hidden lg:block">
+              <div className="w-64 h-64 rounded-full border-2 border-dashed border-primary/20 flex items-center justify-center p-4 group">
+                <a
+                  href={`mailto:${email}`}
+                  className="w-full h-full rounded-full bg-primary text-primary-foreground flex flex-col items-center justify-center gap-2 shadow-2xl shadow-primary/30 group-hover:scale-105 transition-transform duration-500"
+                >
+                  <Mail size={32} />
+                  <span className="font-black tracking-widest uppercase text-xs">Email Me</span>
+                </a>
               </div>
-              <h3 className="text-lg font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
-                Book a Call
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Schedule a 30-min intro call
-              </p>
-            </a>
-          </div>
-
-          {/* Location */}
-          <div className="flex items-center justify-center gap-2 text-muted-foreground mb-12">
-            <MapPin size={16} />
-            <span>Based in Bareilly, India</span>
-            <span className="text-primary">•</span>
-            <span>Available worldwide</span>
-          </div>
-
-          {/* CTA Button */}
-          <div className="text-center mb-12">
-            <div ref={buttonRef} className="inline-block">
-              <a
-                href="mailto:rj838486@gmail.com"
-                className="group inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground 
-                         rounded-full font-medium text-lg transition-all duration-500 
-                         hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
-              >
-                <Send size={20} />
-                Say Hello
-                <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </a>
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className="flex justify-center gap-4">
-            {[
-              { icon: Github, href: 'https://github.com/rishabhjaiswal3', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://www.linkedin.com/in/rishabh-jaiswal-710b18169/', label: 'LinkedIn' },
-              { icon: Twitter, href: '#', label: 'Twitter' },
-            ].map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 rounded-xl border border-border/30 text-muted-foreground 
-                         hover:text-primary hover:border-primary/30 hover:bg-primary/5
-                         transition-all duration-300 hover:-translate-y-1"
-                aria-label={social.label}
-              >
-                <social.icon size={22} />
-              </a>
-            ))}
+          <div className="grid lg:grid-cols-12 gap-12 items-start" ref={socialRef}>
+            {/* Left Column - Large CTA */}
+            <div className="lg:col-span-8 social-icon-item">
+              <div className="group relative p-12 md:p-16 rounded-[3rem] bg-card/40 backdrop-blur-2xl border border-white/5 shadow-2xl overflow-hidden text-left">
+                <div className="absolute top-0 right-0 p-16 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Sparkles size={200} />
+                </div>
+
+                <h3 className="text-4xl md:text-6xl font-black text-foreground mb-8 tracking-tight">
+                  Have a vision for <br />
+                  <span className="text-primary italic">something big?</span>
+                </h3>
+
+                <div className="flex flex-wrap gap-6 mb-12">
+                  <a
+                    href={telegramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 px-10 py-6 bg-primary text-primary-foreground rounded-2xl font-black text-xl shadow-xl shadow-primary/20 hover:-translate-y-2 transition-all duration-500"
+                  >
+                    <Send size={24} />
+                    Start Messaging
+                  </a>
+                  <a
+                    href={calendarUrl}
+                    className="flex items-center gap-4 px-10 py-6 bg-white/5 text-foreground rounded-2xl font-black text-xl border border-white/10 hover:bg-white/10 transition-all duration-500"
+                  >
+                    <Calendar size={24} className="text-primary" />
+                    Book Intro Call
+                  </a>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-8 text-muted-foreground font-medium">
+                  <div className="flex items-center gap-2">
+                    <MapPin size={18} className="text-primary" />
+                    <span>Based in India • Working Worldwide</span>
+                  </div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary/30" />
+                  <div className="flex items-center gap-2">
+                    <span className="text-primary tracking-widest uppercase text-[10px] font-black">SLA:</span>
+                    <span>&lt; 24 Hours Reply</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Social Links */}
+            <div className="lg:col-span-4 h-full">
+              <div className="flex flex-col gap-4 h-full">
+                {[
+                  { icon: Github, label: 'GitHub', href: 'https://github.com/rishabhjaiswal3' },
+                  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/rishabh-jaiswal-710b18169/' },
+                  { icon: Send, label: 'Telegram', href: telegramUrl },
+                ].map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-icon-item group bg-card/40 backdrop-blur-xl border border-white/5 p-8 rounded-3xl flex items-center justify-between hover:border-primary/30 transition-all duration-500 hover:-translate-x-2"
+                  >
+                    <div className="flex items-center gap-6 text-left">
+                      <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                        <social.icon size={26} />
+                      </div>
+                      <span className="text-2xl font-black text-foreground">{social.label}</span>
+                    </div>
+                    <ArrowUpRight size={24} className="text-muted-foreground group-hover:text-primary transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
