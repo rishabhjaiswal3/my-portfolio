@@ -152,7 +152,7 @@ const Hero = () => {
             </div>
 
             <p className="hero-description text-lg text-muted-foreground max-w-xl leading-relaxed">
-              A passionate Software Developer with 3+ years of experience building 
+              A passionate Software Developer with 4.5+ years of experience building 
               scalable web applications, blockchain solutions, and AI-powered tools. 
               Currently crafting exceptional digital experiences at{' '}
               <span className="text-primary">Surebright</span> &{' '}
