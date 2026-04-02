@@ -87,6 +87,11 @@
     scroll-behavior: smooth;
   }
 
+  /* Prevent fixed navbar from overlapping section headings on anchor scroll */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'DM Sans', system-ui, sans-serif;

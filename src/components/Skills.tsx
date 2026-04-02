@@ -42,6 +42,7 @@ const toolbox = [
 
 const stats = [
   { value: 4, suffix: '.5+', label: 'Years Experience', icon: Zap },
+  { value: 500, suffix: '+', label: 'LeetCode Solved', icon: Code },
   { value: 10, suffix: 'K+', label: 'Blockchain Txns', icon: Blocks },
   { value: 40, suffix: '%', label: 'Buffering Reduced', icon: Globe },
   { value: 98, suffix: '%', label: 'Client Satisfaction', icon: Rocket },
@@ -94,7 +95,7 @@ const Skills = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-32">
             {stats.map((stat) => (
               <StatCounter key={stat.label} {...stat} />
             ))}

@@ -55,14 +55,18 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <a
           href="#"
-          className="text-2xl font-display text-foreground hover:text-primary transition-colors duration-300 z-10 flex items-center gap-2"
+          className={`z-10 flex items-center gap-2.5 px-3 py-2 rounded-full border transition-all duration-500 ${
+            isScrolled
+              ? 'bg-card/85 backdrop-blur-2xl border-border/50 shadow-2xl'
+              : 'bg-card/35 backdrop-blur-xl border-white/5'
+          }`}
         >
-          <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
-            <span className="text-primary font-bold">R</span>
+          <div className="w-8 h-8 bg-primary/15 rounded-lg flex items-center justify-center border border-primary/25 shadow-sm">
+            <span className="text-primary font-black text-sm">R</span>
           </div>
           <div className="hidden sm:block">
-            <span className="font-bold tracking-tight">Rishabh<span className="text-primary">.</span></span>
-            <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">Engineering Portfolio</p>
+            <span className="font-bold tracking-tight text-foreground text-sm hover:text-primary transition-colors">Rishabh<span className="text-primary">.</span></span>
+            <p className="text-[9px] uppercase tracking-[0.32em] text-muted-foreground">Engineering Portfolio</p>
           </div>
         </a>
 

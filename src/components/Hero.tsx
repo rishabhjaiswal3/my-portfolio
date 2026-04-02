@@ -183,7 +183,7 @@ const Hero = () => {
               </a>
 
               <a
-                href="/Rishabh_Jaiswal.pdf"
+                href={`${import.meta.env.BASE_URL}Rishabh_Jaiswal.pdf`}
                 download="Rishabh_Jaiswal_Resume.pdf"
                 className="hero-cta group inline-flex items-center gap-2.5 px-7 py-3.5 bg-transparent border border-border/40 text-muted-foreground rounded-xl font-black text-sm
                          hover:border-primary/30 hover:text-foreground transition-all duration-400 hover:-translate-y-0.5"
