@@ -1,4 +1,4 @@
-import { Mail, MapPin, Send, Github, Linkedin, ArrowUpRight, Calendar, MessageSquare, Sparkles } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, ArrowUpRight, Calendar, MessageSquare, Sparkles, Phone, MessageCircle } from 'lucide-react';
 import { useScrollReveal, useMagnetic, useStaggerReveal } from '@/hooks/useGSAP';
 
 const Contact = () => {
@@ -8,6 +8,8 @@ const Contact = () => {
 
   const email = "rj838486@gmail.com";
   const telegramUrl = "https://t.me/Proto200";
+  const whatsappUrl = "https://wa.me/916396964517";
+  const phoneNumber = "+91 63969 64517";
   const calendarUrl = `mailto:${email}?subject=Schedule%20a%20Meeting&body=Hi%20Rishabh,%20I'd%20like%20to%20schedule%20a%20meeting%20to%20discuss...`;
 
   return (
@@ -25,7 +27,7 @@ const Contact = () => {
           {/* Section Header */}
           <div className="flex flex-col md:flex-row items-end justify-between gap-12 mb-24">
             <div className="max-w-2xl text-left">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 text-[10px] font-black uppercase tracking-[0.4em] text-primary bg-primary/10 rounded-full border border-primary/20">
+              <span className="eyebrow-chip mb-8">
                 <MessageSquare size={12} />
                 Get in Touch
               </span>
@@ -77,6 +79,15 @@ const Contact = () => {
                     Start Messaging
                   </a>
                   <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 px-10 py-6 bg-emerald-500/15 text-foreground rounded-2xl font-black text-xl border border-emerald-400/20 hover:bg-emerald-500/20 hover:-translate-y-2 transition-all duration-500"
+                  >
+                    <MessageCircle size={24} className="text-emerald-400" />
+                    WhatsApp Me
+                  </a>
+                  <a
                     href={calendarUrl}
                     className="flex items-center gap-4 px-10 py-6 bg-white/5 text-foreground rounded-2xl font-black text-xl border border-white/10 hover:bg-white/10 transition-all duration-500"
                   >
@@ -90,6 +101,11 @@ const Contact = () => {
                     <MapPin size={18} className="text-primary" />
                     <span>Based in India • Working Worldwide</span>
                   </div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary/30" />
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                    <Phone size={18} className="text-emerald-400" />
+                    <span>{phoneNumber}</span>
+                  </a>
                   <div className="w-1.5 h-1.5 rounded-full bg-primary/30" />
                   <div className="flex items-center gap-2">
                     <span className="text-primary tracking-widest uppercase text-[10px] font-black">SLA:</span>
@@ -106,6 +122,7 @@ const Contact = () => {
                   { icon: Github, label: 'GitHub', href: 'https://github.com/rishabhjaiswal3' },
                   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/rishabh-jaiswal-710b18169/' },
                   { icon: Send, label: 'Telegram', href: telegramUrl },
+                  { icon: MessageCircle, label: 'WhatsApp', href: whatsappUrl },
                 ].map((social) => (
                   <a
                     key={social.label}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Menu, X, Github, Linkedin, Sun, Moon } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Sun, Moon, MessageCircle } from 'lucide-react';
 import gsap from 'gsap';
 import { useTheme } from 'next-themes';
 import { useMagnetic } from '@/hooks/useGSAP';
@@ -7,8 +7,10 @@ import { useMagnetic } from '@/hooks/useGSAP';
 const navLinks = [
   { name: 'Home', href: '#' },
   { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
   { name: 'Toolbox', href: '#skills' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 const Navbar = () => {
@@ -17,6 +19,7 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const ctaRef = useMagnetic(0.3);
+  const whatsappUrl = 'https://wa.me/916396964517';
 
   useEffect(() => {
     setMounted(true);
@@ -50,22 +53,23 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
         <a
           href="#"
           className="text-2xl font-display text-foreground hover:text-primary transition-colors duration-300 z-10 flex items-center gap-2"
         >
-          <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+          <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
             <span className="text-primary font-bold">R</span>
           </div>
-          <span className="hidden sm:inline font-bold tracking-tight">Rishabh<span className="text-primary">.</span></span>
+          <div className="hidden sm:block">
+            <span className="font-bold tracking-tight">Rishabh<span className="text-primary">.</span></span>
+            <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">Engineering Portfolio</p>
+          </div>
         </a>
 
-        {/* Center Nav - Floating Pill */}
         <div
           className={`nav-container hidden md:flex items-center gap-1 px-4 py-2 rounded-full border transition-all duration-500 ${isScrolled
-              ? 'bg-card/90 backdrop-blur-xl border-border/50 shadow-lg'
-              : 'bg-transparent border-transparent'
+              ? 'bg-card/85 backdrop-blur-2xl border-border/50 shadow-2xl'
+              : 'bg-card/35 backdrop-blur-xl border-white/5'
             }`}
         >
           {navLinks.map((link) => (
@@ -73,23 +77,25 @@ const Navbar = () => {
               key={link.name}
               href={link.href}
               className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground 
-                       rounded-full transition-all duration-300 font-medium"
+                       rounded-full transition-all duration-300 font-medium hover:bg-white/5"
             >
               {link.name}
             </a>
           ))}
           <div ref={ctaRef} className="ml-2">
             <a
-              href="#contact"
-              className="px-5 py-2 text-sm bg-primary text-primary-foreground rounded-full 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2 text-sm bg-primary text-primary-foreground rounded-full 
                        hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 font-medium"
             >
-              Get in Touch
+              <MessageCircle size={14} />
+              WhatsApp
             </a>
           </div>
         </div>
 
-        {/* Right Side - Actions */}
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-1 px-2 py-1.5 rounded-full bg-card/60 backdrop-blur-md border border-border/30">
             {[
@@ -109,7 +115,6 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Theme Toggle Button */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-3 rounded-full bg-card/60 backdrop-blur-md border border-border/30 text-muted-foreground 
@@ -119,7 +124,6 @@ const Navbar = () => {
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-foreground hover:text-primary transition-colors p-2 z-10"
@@ -130,7 +134,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       <div
         className={`md:hidden fixed inset-0 bg-background/98 backdrop-blur-xl transition-all duration-500 z-40 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
@@ -152,11 +155,13 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#contact"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
             className="mt-4 px-10 py-4 bg-primary text-primary-foreground rounded-full text-lg font-medium shadow-lg shadow-primary/20"
           >
-            Get in Touch
+            WhatsApp Me
           </a>
 
           {/* Mobile Social Links */}

@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Github, Sparkles, Globe, ArrowUpRight, Layers, Terminal, Code2, Cpu } from 'lucide-react';
+import { Github, ArrowUpRight, Cpu } from 'lucide-react';
 import { useStaggerReveal, useTilt } from '@/hooks/useGSAP';
 
 import projectAIImageGen from '@/assets/project-ai-image-gen.jpg';
@@ -13,46 +12,13 @@ import projectKultGames from '@/assets/project-kult-games.jpg';
 
 const projects = [
   {
-    title: 'AI Image Generator',
-    description: 'A powerful AI-powered image generation tool using OpenAI API. Users can create stunning images from text descriptions with various artistic styles.',
-    image: projectAIImageGen,
-    tags: ['React', 'OpenAI API', 'Node.js', 'Tailwind'],
-    featured: true,
-    isAI: true,
-    color: 'from-purple-500/20 to-pink-500/20',
-  },
-  {
-    title: 'AI Chatbot with Claude',
-    description: 'An intelligent conversational AI chatbot powered by Anthropic Claude model. Features context-aware responses and code assistance.',
-    image: projectAIChatbot,
-    tags: ['React', 'Claude API', 'TypeScript', 'WebSocket'],
-    featured: true,
-    isAI: true,
-    color: 'from-blue-500/20 to-cyan-500/20',
-  },
-  {
-    title: 'NFTKart Marketplace',
-    description: 'A decentralized NFT marketplace on Polygon chain. Features minting, trading, and auctions with MetaMask integration.',
-    image: projectNFT,
-    tags: ['Solidity', 'React', 'Web3.js', 'OpenSea'],
-    featured: true,
-    color: 'from-orange-500/20 to-yellow-500/20',
-  },
-  {
-    title: 'Video Transcoding Engine',
-    description: 'Cloud-based video processing system converting raw videos into multiple quality formats (360p–1080p). Uses FFmpeg and HLS protocol to automatically adjust quality based on viewer bandwidth.',
-    image: projectTranscoding,
-    tags: ['FFmpeg', 'HLS', 'Node.js', 'Docker', 'AWS S3'],
-    featured: true,
-    color: 'from-green-500/20 to-emerald-500/20',
-  },
-  {
-    title: 'Kult Games',
-    description: 'Modern gaming platform with competitive esports features, tournament management, and community engagement.',
-    image: projectKultGames,
-    tags: ['React', 'Next.js', 'TypeScript', 'Tailwind'],
+    title: 'VideoManch.com',
+    description: 'Streaming-first video platform concept with home feed, shorts, live sessions, show discovery, and category-led browsing for OTT and creator-style experiences.',
+    image: projectOTT,
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind'],
     featured: false,
-    isWeb: true,
+    category: 'Streaming UI',
+    impact: 'OTT-style discovery flows',
   },
   {
     title: 'OTT Streaming Platform',
@@ -60,6 +26,8 @@ const projects = [
     image: projectOTT,
     tags: ['React', 'Node.js', 'Stripe', 'HLS'],
     featured: false,
+    category: 'OTT Platform',
+    impact: 'Subscriptions + playback',
   },
   {
     title: 'Vossle WebAR Platform',
@@ -67,6 +35,8 @@ const projects = [
     image: projectVossle,
     tags: ['React', 'Three.js', 'WebAR', 'LIFF SDK'],
     featured: false,
+    category: 'Immersive SaaS',
+    impact: 'Mobile WebAR tooling',
   },
   {
     title: 'E-Commerce Platform',
@@ -74,122 +44,152 @@ const projects = [
     image: projectEcommerce,
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     featured: false,
+    category: 'Commerce',
+    impact: 'High-concurrency storefront',
+  },
+  {
+    title: 'Kult Games & Browser',
+    description: 'AI-native on-chain gaming ecosystem spanning catalog discovery, wallet-aware gameplay, and public game surfaces for Guess The AI, Zero G Pool, Zero Dash, Robo Wars, and Highway Hustle.',
+    image: projectKultGames,
+    tags: ['React', 'TypeScript', 'Rust', 'FastAPI'],
+    featured: false,
+    category: 'Gaming Ecosystem',
+    impact: 'Catalog + platform services',
+  },
+  {
+    title: 'GUESS_THE_AI',
+    description: 'A competitive AI-vs-human recognition game with wallet-based auth, streaks, leaderboards, daily challenges, and real-time progression across web and mobile-friendly gameplay.',
+    image: projectAIImageGen,
+    tags: ['React', 'Node.js', 'Socket.IO', 'Privy'],
+    featured: false,
+    category: 'Competitive Game',
+    impact: 'Realtime leaderboard loops',
+  },
+  {
+    title: 'Warzone',
+    description: 'Web3 gaming experience with wallet-linked player profiles, tournament metadata sync, multiplayer-ready frontend flows, and backend services for progression and competition handling.',
+    image: projectAIChatbot,
+    tags: ['React', 'Express', 'MongoDB', 'Ethers.js'],
+    featured: false,
+    category: 'Web3 Gaming',
+    impact: 'Tournament + wallet sync',
+  },
+  {
+    title: 'AI Image Generator',
+    description: 'A powerful AI-powered image generation tool using OpenAI API. Users can create stunning images from text descriptions with various artistic styles.',
+    image: projectAIImageGen,
+    tags: ['React', 'OpenAI API', 'Node.js', 'Tailwind'],
+    featured: true,
+    category: 'AI Product',
+    impact: 'Text-to-image workflow',
+  },
+  {
+    title: 'AI Chatbot with Claude',
+    description: 'An intelligent conversational AI chatbot powered by Anthropic Claude model. Features context-aware responses and code assistance.',
+    image: projectAIChatbot,
+    tags: ['React', 'Claude API', 'TypeScript', 'WebSocket'],
+    featured: true,
+    category: 'LLM Interface',
+    impact: 'Context-aware assistant',
+  },
+  {
+    title: 'NFTKart Marketplace',
+    description: 'A decentralized NFT marketplace on Polygon chain. Features minting, trading, and auctions with MetaMask integration.',
+    image: projectNFT,
+    tags: ['Solidity', 'React', 'Web3.js', 'OpenSea'],
+    featured: true,
+    category: 'Blockchain Commerce',
+    impact: 'Polygon marketplace',
+  },
+  {
+    title: 'Video Transcoding Engine',
+    description: 'Cloud-based video processing system converting raw videos into multiple quality formats (360p–1080p). Uses FFmpeg and HLS protocol to automatically adjust quality based on viewer bandwidth.',
+    image: projectTranscoding,
+    tags: ['FFmpeg', 'HLS', 'Node.js', 'Docker', 'AWS S3'],
+    featured: true,
+    category: 'Media Infrastructure',
+    impact: 'Adaptive streaming engine',
   },
 ];
 
-const FlipCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const tiltRef = useTilt(12);
+const ProjectCard = ({ project }: { project: typeof projects[number] }) => {
+  const tiltRef = useTilt(6);
 
   return (
-    <div
+    <article
       ref={tiltRef}
-      className="relative h-[580px] perspective-[2000px] cursor-pointer group"
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
+      className="project-item group relative overflow-hidden rounded-[1.75rem] border border-white/8 bg-gradient-card transition-all duration-500 hover:-translate-y-2 hover:border-primary/35 hover:shadow-2xl hover:shadow-primary/8"
+      style={{ transformStyle: 'preserve-3d' }}
     >
-      <div
-        className={`relative w-full h-full transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] preserve-3d ${isFlipped ? 'rotate-y-180' : ''
-          }`}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        {/* Front */}
-        <div
-          className="absolute inset-0 backface-hidden rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-card"
-          style={{ backfaceVisibility: 'hidden' }}
-        >
-          <div className="absolute inset-0 overflow-hidden">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110 group-hover:rotate-1"
-            />
-          </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-primary/[0.04] pointer-events-none" />
+      <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/6 blur-2xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+      {/* Image */}
+      <div className="relative overflow-hidden">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-52 object-cover transition-transform duration-600 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/15 to-transparent" />
 
-          <div className="absolute bottom-0 left-0 right-0 p-10 translate-z-20 text-left">
-            <div className="flex items-center gap-3 mb-6 font-display">
-              <div className="px-4 py-1.5 rounded-full bg-primary/20 backdrop-blur-xl border border-primary/30 text-[10px] font-black uppercase tracking-[0.2em] text-primary">
-                {project.isAI ? 'Neural Architecture' : 'Distributed System'}
-              </div>
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            </div>
-
-            <h3 className="text-4xl md:text-5xl font-display text-white font-black mb-6 tracking-tight leading-[1.1]">
-              {project.title.split(' ').map((word, i) => (
-                <span key={i} className="block">{word}</span>
-              ))}
-            </h3>
-
-            <div className="flex flex-wrap gap-2 pt-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-100">
-              {project.tags.slice(0, 4).map((tag) => (
-                <span key={tag} className="px-4 py-2 text-[10px] font-mono font-bold bg-white/5 backdrop-blur-md text-white/70 rounded-xl border border-white/10">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+        {/* Category pill */}
+        <div className="absolute left-4 top-4 px-3 py-1.5 rounded-full border border-white/10 bg-background/60 backdrop-blur-lg text-[10px] font-black uppercase tracking-[0.28em] text-white">
+          {project.category}
         </div>
 
-        {/* Back */}
-        <div
-          className="absolute inset-0 backface-hidden rounded-[3rem] overflow-hidden border-2 border-primary/30 bg-card p-10 md:p-12 flex flex-col rotate-y-180"
-          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-        >
-          <div className="absolute inset-0 opacity-[0.03] select-none pointer-events-none">
-            <div className="grid-bg h-full w-full" />
-          </div>
-
-          <div className="relative z-10 flex flex-col h-full text-left">
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                  <Code2 size={24} className="text-primary" />
-                </div>
-                <h3 className="text-2xl font-display text-foreground font-black tracking-tight leading-none">{project.title}</h3>
-              </div>
-              <a
-                href="https://github.com/rishabhjaiswal3"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-2xl bg-muted text-foreground hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-500 border border-border"
-              >
-                <Github size={20} />
-              </a>
-            </div>
-
-            <p className="text-muted-foreground text-lg leading-relaxed flex-1 mb-8 overflow-y-auto pr-2 custom-scrollbar">
-              {project.description}
-            </p>
-
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-4 font-display">Core Stack</h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="px-4 py-2 text-[10px] font-mono font-bold bg-muted text-foreground/80 rounded-xl border border-border">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <a
-                href="https://github.com/rishabhjaiswal3"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group w-full py-5 rounded-2xl bg-primary text-primary-foreground font-black text-lg shadow-xl shadow-primary/20
-                               flex items-center justify-center gap-4 hover:-translate-y-1 transition-all duration-500 font-display"
-              >
-                View Codebase
-                <ArrowUpRight size={20} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </a>
-            </div>
-          </div>
+        {/* Impact tag bottom-left on image */}
+        <div className="absolute bottom-3 left-4">
+          <p className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/80">{project.impact}</p>
         </div>
       </div>
-    </div>
+
+      {/* Card body */}
+      <div className="relative z-10 p-6 text-left">
+        {/* Title row */}
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <h3 className="text-xl font-display font-black tracking-tight text-foreground transition-colors group-hover:text-primary leading-snug flex-1">
+            {project.title}
+          </h3>
+          <a
+            href="https://github.com/rishabhjaiswal3"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex shrink-0 items-center justify-center h-9 w-9 rounded-xl border border-white/10 bg-white/[0.03] text-muted-foreground transition-all duration-400 hover:border-primary/35 hover:text-primary hover:bg-primary/5"
+          >
+            <Github size={15} />
+          </a>
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-5">
+          {project.description}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {project.tags.slice(0, 4).map((tag) => (
+            <span
+              key={tag}
+              className="px-2.5 py-1 rounded-lg border border-primary/12 bg-primary/[0.05] font-mono font-bold uppercase tracking-[0.15em] text-primary/75 text-[9px]"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* CTA link */}
+        <a
+          href="https://github.com/rishabhjaiswal3"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group/link inline-flex items-center gap-2 font-black uppercase tracking-[0.2em] text-xs text-foreground/65 transition-colors hover:text-primary"
+        >
+          View Build
+          <ArrowUpRight size={13} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+        </a>
+      </div>
+    </article>
   );
 };
 
@@ -198,100 +198,41 @@ const Projects = () => {
 
   return (
     <section id="projects" className="section-padding relative overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-gradient-mesh opacity-60" />
+      <div className="absolute left-[10%] top-24 h-48 w-48 rounded-full border border-white/10 orbital-ring opacity-60" />
+      <div className="absolute right-[8%] top-1/3 h-56 w-56 rounded-full border border-primary/10 float-gentle opacity-50" />
+
       <div className="container-custom relative z-10">
         <div ref={sectionRef}>
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row items-end justify-between gap-12 mb-32">
+          {/* Section header */}
+          <div className="mb-20 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl text-left font-display">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 text-[10px] font-black uppercase tracking-[0.4em] text-primary bg-primary/10 rounded-full border border-primary/20">
+              <span className="eyebrow-chip mb-8">
                 <Cpu size={14} className="animate-pulse" />
-                Featured Deployments
+                Selected Work
               </span>
-              <h2 className="text-7xl md:text-9xl text-foreground mb-10 leading-[0.85] font-black tracking-tighter">
-                Crafting <br />
-                <span className="text-gradient italic">Digital</span> <br />
-                Experiences
+              <h2 className="text-6xl md:text-8xl text-foreground mb-6 leading-[0.88] font-black tracking-tighter">
+                Projects That{' '}
+                <span className="text-gradient italic">Ship With Intent</span>
               </h2>
+              <p className="max-w-2xl text-lg md:text-xl font-light leading-relaxed text-muted-foreground">
+                A curated selection of product interfaces, AI-native experiences, gaming systems, streaming builds, and backend-heavy engineering work.
+              </p>
             </div>
-            <div className="max-w-sm pb-4 text-left">
-              <p className="text-muted-foreground text-xl font-light leading-relaxed border-l-2 border-primary/30 pl-8">
-                A selection of high-impact engineering projects, where design meets extreme technical complexity.
+
+            <div className="section-shell shrink-0 max-w-xs px-6 py-5 text-left">
+              <p className="mb-2 text-[10px] uppercase tracking-[0.38em] text-primary/80">Portfolio</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {projects.length} projects across AI, Web3, gaming, streaming, and commerce.
               </p>
             </div>
           </div>
 
-          {/* Featured Projects Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 mb-40">
-            {projects
-              .filter((p) => p.featured)
-              .map((project, index) => (
-                <div key={project.title} className="project-item">
-                  <FlipCard project={project} index={index} />
-                </div>
-              ))}
-          </div>
-
-          {/* Other Projects Section */}
-          <div className="pt-32 border-t border-border/50">
-            <div className="flex flex-col md:flex-row items-baseline justify-between gap-8 mb-20 text-left font-display">
-              <div>
-                <h3 className="text-5xl md:text-6xl text-foreground font-black tracking-tight mb-4">Other Projects</h3>
-                <p className="text-muted-foreground text-xl font-light italic opacity-60">Experimentation and smaller builds</p>
-              </div>
-              <a
-                href="https://github.com/rishabhjaiswal3"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 text-primary font-black text-lg hover:mr-2 transition-all"
-              >
-                Archive <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </a>
-            </div>
-
-            {/* Columnar List */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {projects
-                .filter((p) => !p.featured)
-                .map((project) => (
-                  <div
-                    key={project.title}
-                    className="project-item group relative p-10 rounded-[2.5rem] bg-card/60 backdrop-blur-2xl border border-border/50 
-                             hover:border-primary/30 transition-all duration-700 hover:-translate-y-3 hover:shadow-2xl overflow-hidden text-left"
-                  >
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-
-                    <div className="flex items-center justify-between mb-12">
-                      <div className="w-16 h-16 rounded-[1.25rem] bg-muted/50 text-primary border border-border/50 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-700 flex items-center justify-center shadow-xl">
-                        <Terminal size={28} />
-                      </div>
-                      <a
-                        href="https://github.com/rishabhjaiswal3"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 flex items-center justify-center rounded-2xl bg-muted/50 text-foreground/40 hover:text-primary transition-all duration-500 border border-border/50 hover:border-primary/30"
-                      >
-                        <Github size={20} />
-                      </a>
-                    </div>
-
-                    <h4 className="text-2xl font-display text-foreground font-black mb-4 tracking-tight group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h4>
-
-                    <p className="text-muted-foreground text-base leading-relaxed mb-12 font-light line-clamp-3">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2.5">
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary/60 bg-primary/5 px-3 py-1.5 rounded-xl border border-primary/20">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-            </div>
+          {/* Unified project grid */}
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {projects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
           </div>
         </div>
       </div>

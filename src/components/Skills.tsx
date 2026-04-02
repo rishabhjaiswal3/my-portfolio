@@ -5,37 +5,37 @@ const toolbox = [
   {
     category: 'Frontend',
     icon: Code,
-    tools: ['React.js', 'React Native', 'Next.js', 'Angular 12', 'TypeScript', 'Tailwind CSS'],
+    tools: ['React.js', 'Next.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'GSAP'],
     color: 'from-blue-500/20 to-cyan-500/20',
   },
   {
     category: 'Backend',
     icon: Cpu,
-    tools: ['Node.js', 'Express.js', 'Python', 'NestJS', 'GraphQL', 'REST APIs'],
+    tools: ['Node.js', 'Express.js', 'Rust', 'Axum', 'Python', 'FastAPI'],
     color: 'from-green-500/20 to-emerald-500/20',
   },
   {
     category: 'Databases',
     icon: Database,
-    tools: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Prisma'],
+    tools: ['MongoDB', 'Redis', 'PostgreSQL', 'MySQL', 'Mongoose', 'AWS S3'],
     color: 'from-purple-500/20 to-pink-500/20',
   },
   {
-    category: 'Blockchain',
+    category: 'Web3 & Auth',
     icon: Blocks,
-    tools: ['Solidity', 'Ethereum', 'Polygon', 'Web3.js', 'Ethers.js', 'MetaMask'],
+    tools: ['Solidity', 'Viem', 'Ethers.js', 'Privy', 'Wagmi', 'MetaMask'],
     color: 'from-orange-500/20 to-yellow-500/20',
   },
   {
     category: 'DevOps',
     icon: Cloud,
-    tools: ['Docker', 'Kubernetes', 'AWS', 'DigitalOcean', 'Nginx', 'CI/CD'],
+    tools: ['Docker', 'Kubernetes', 'AWS', 'Nginx', 'CI/CD', 'Uvicorn'],
     color: 'from-sky-500/20 to-blue-500/20',
   },
   {
-    category: 'Advanced Tools',
+    category: 'Realtime & Media',
     icon: Settings,
-    tools: ['Git', 'FFmpeg', 'RabbitMQ', 'Keycloak', 'Stripe', 'OpenAI API'],
+    tools: ['Socket.IO', 'FFmpeg', 'HLS', 'React Query', 'Three.js', 'OpenAI API'],
     color: 'from-rose-500/20 to-red-500/20',
   },
 ];
@@ -75,14 +75,14 @@ const Skills = () => {
 
   return (
     <section id="skills" className="section-padding relative overflow-hidden bg-muted/10">
+      <div className="absolute inset-0 bg-gradient-mesh opacity-35" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
       <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[200px] -z-10" />
 
       <div className="container-custom relative z-10 font-display">
         <div ref={sectionRef}>
-          {/* Section Header */}
           <div className="max-w-4xl mb-24 text-left">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 text-[10px] font-black uppercase tracking-[0.4em] text-primary bg-primary/10 rounded-full border border-primary/20">
+            <span className="eyebrow-chip mb-8">
               <Wrench size={14} />
               The Infrastructure
             </span>
@@ -94,25 +94,24 @@ const Skills = () => {
             </p>
           </div>
 
-          {/* Stats Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
             {stats.map((stat) => (
               <StatCounter key={stat.label} {...stat} />
             ))}
           </div>
 
-          {/* Toolbox Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {toolbox.map((category, i) => (
               <div
                 key={category.category}
-                className={`skill-card group relative p-12 rounded-[3rem] bg-card shadow-2xl border border-border/30 
-                          hover:border-primary/40 transition-all duration-700 overflow-hidden flex flex-col text-left`}
+                className={`skill-card group relative p-12 rounded-[3rem] bg-gradient-card shadow-2xl border border-border/30 
+                          hover:border-primary/40 transition-all duration-700 overflow-hidden flex flex-col text-left shine-sweep`}
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                {/* Visual Accent */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-primary/[0.05]" />
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${category.color} opacity-0 
                                group-hover:opacity-40 transition-opacity duration-700 blur-3xl -translate-y-1/2 translate-x-1/2`} />
+                <div className="absolute left-8 top-8 h-12 w-12 rounded-full border border-white/5 float-gentle opacity-60" />
 
                 <div className="relative z-10 flex-1">
                   <div className="flex items-center gap-6 mb-12">
@@ -120,9 +119,12 @@ const Skills = () => {
                                   group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-700 shadow-xl">
                       <category.icon size={28} className="text-primary group-hover:text-inherit" />
                     </div>
-                    <h3 className="text-3xl font-black text-foreground group-hover:text-primary transition-colors tracking-tight">
-                      {category.category}
-                    </h3>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.3em] text-primary/70 mb-2">Capability</p>
+                      <h3 className="text-3xl font-black text-foreground group-hover:text-primary transition-colors tracking-tight">
+                        {category.category}
+                      </h3>
+                    </div>
                   </div>
 
                   <div className="flex flex-wrap gap-3">

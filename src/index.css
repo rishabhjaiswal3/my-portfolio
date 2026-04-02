@@ -6,46 +6,44 @@
 
 @layer base {
   :root {
-    /* Base Colors - Defaults to Dark for Premium Feel */
-    --background: 220 25% 3%;
-    --foreground: 210 20% 95%;
+    --background: 216 31% 6%;
+    --foreground: 210 40% 96%;
 
-    --card: 220 25% 6%;
-    --card-foreground: 210 20% 95%;
+    --card: 220 24% 9%;
+    --card-foreground: 210 30% 96%;
 
-    --popover: 220 25% 6%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 220 24% 9%;
+    --popover-foreground: 210 30% 96%;
 
-    --primary: 185 75% 45%;
-    --primary-foreground: 220 25% 3%;
+    --primary: 22 93% 59%;
+    --primary-foreground: 220 30% 8%;
 
-    --secondary: 220 30% 12%;
-    --secondary-foreground: 210 20% 90%;
+    --secondary: 216 24% 14%;
+    --secondary-foreground: 210 24% 92%;
 
-    --muted: 220 25% 10%;
-    --muted-foreground: 215 15% 55%;
+    --muted: 218 21% 12%;
+    --muted-foreground: 214 15% 67%;
 
-    --accent: 175 60% 40%;
-    --accent-foreground: 220 25% 3%;
+    --accent: 192 85% 60%;
+    --accent-foreground: 220 30% 8%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 210 20% 98%;
 
-    --border: 220 20% 15%;
-    --input: 220 20% 15%;
-    --ring: 185 75% 45%;
+    --border: 219 18% 18%;
+    --input: 219 18% 18%;
+    --ring: 22 93% 59%;
 
     --radius: 0.75rem;
 
-    /* Elegant Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(185 75% 45%), hsl(175 60% 40%));
-    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(185 75% 45% / 0.15), transparent);
-    --gradient-card: linear-gradient(135deg, hsl(220 25% 8%) 0%, hsl(220 25% 5%) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(185 75% 50%), hsl(175 60% 45%), hsl(195 80% 55%));
+    --gradient-primary: linear-gradient(135deg, hsl(22 93% 59%), hsl(47 95% 61%), hsl(192 85% 60%));
+    --gradient-hero: radial-gradient(circle at top, hsl(22 93% 59% / 0.18), transparent 38%), radial-gradient(circle at 85% 30%, hsl(192 85% 60% / 0.14), transparent 32%);
+    --gradient-card: linear-gradient(160deg, hsl(220 24% 11%) 0%, hsl(217 27% 8%) 55%, hsl(216 31% 6%) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(22 93% 64%), hsl(47 95% 65%), hsl(192 85% 66%));
+    --gradient-mesh: radial-gradient(circle at 20% 20%, hsl(22 93% 59% / 0.18), transparent 22%), radial-gradient(circle at 80% 10%, hsl(192 85% 60% / 0.14), transparent 20%), radial-gradient(circle at 50% 80%, hsl(47 95% 61% / 0.1), transparent 24%);
 
-    /* Shadows & Glows */
-    --glow-primary: 0 0 40px hsl(185 75% 45% / 0.15);
-    --shadow-elegant: 0 25px 50px -12px hsl(220 25% 3% / 0.8);
+    --glow-primary: 0 0 40px hsl(22 93% 59% / 0.18);
+    --shadow-elegant: 0 30px 80px -28px hsl(220 40% 2% / 0.7);
   }
 
   .light {
@@ -94,6 +92,8 @@
     font-family: 'DM Sans', system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.6;
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
   }
 
   ::selection {
@@ -141,6 +141,10 @@
     background-image: var(--gradient-card);
   }
 
+  .bg-gradient-mesh {
+    background-image: var(--gradient-mesh);
+  }
+
   /* Elegant Glow Effects */
   .glow {
     box-shadow: var(--glow-primary);
@@ -172,7 +176,7 @@
   }
 
   .container-custom {
-    @apply max-w-6xl mx-auto;
+    @apply max-w-7xl mx-auto;
   }
 
   /* Elegant Underline Animation */
@@ -296,6 +300,84 @@
       linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px),
       linear-gradient(to bottom, hsl(var(--border) / 0.1) 1px, transparent 1px);
     background-size: 80px 80px;
+  }
+
+  .section-shell {
+    @apply relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-card/40 backdrop-blur-2xl shadow-2xl;
+  }
+
+  .section-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, hsl(var(--primary) / 0.08), transparent 35%),
+      linear-gradient(315deg, hsl(var(--accent) / 0.08), transparent 30%);
+    pointer-events: none;
+  }
+
+  .eyebrow-chip {
+    @apply inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.4em];
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--accent) / 0.08));
+    border-color: hsl(var(--primary) / 0.18);
+    color: hsl(var(--foreground));
+  }
+
+  .animated-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.5), transparent 35%, hsl(var(--accent) / 0.35), transparent 80%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .shine-sweep::after {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    background: linear-gradient(115deg, transparent 35%, hsl(0 0% 100% / 0.14) 50%, transparent 65%);
+    transform: translateX(-55%) rotate(12deg);
+    transition: transform 900ms ease;
+    pointer-events: none;
+  }
+
+  .shine-sweep:hover::after {
+    transform: translateX(55%) rotate(12deg);
+  }
+
+  .float-gentle {
+    animation: float-gentle 8s ease-in-out infinite;
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -10px, 0);
+    }
+  }
+
+  .orbital-ring {
+    position: relative;
+  }
+
+  .orbital-ring::after {
+    content: '';
+    position: absolute;
+    inset: 8%;
+    border-radius: inherit;
+    border: 1px dashed hsl(var(--primary) / 0.18);
+    animation: spin-slow 22s linear infinite;
+    pointer-events: none;
   }
 
   /* Tech Tag - Refined */
